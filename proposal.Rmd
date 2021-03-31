@@ -31,7 +31,7 @@ This data set was made in May of 2020, and was recently updated to include songs
 
 
 ## **Plan for Exploratory Analysis**
-Here are some questions that we came up as we planned out this proposal. We'll possibly think of more as we continue our final project.
+Here are some questions that we came up as we planned out this proposal. We'll possibly think of more as we continue our final project. The data and questions may help with future research on what is needed for a song to be successful.
 
 ### *Questions we are planning on researching:*
 
