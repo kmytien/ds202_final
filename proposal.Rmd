@@ -1,0 +1,26 @@
+---
+title: 'DS202: Proposal'
+author: "Group 4"
+date: "3/31/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### Team Members: MyTien Kien, Tanner Dunn, Ryan Pate, Saketh Jonnadula
+#### Project Coordinator: MyTien Kien
+
+## Data Set
+https://www.kaggle.com/sudalairajkumar/covid19-in-usa#us_states_covid19_daily.csv
+
+## Motivation of Study
+
+
+
+## Overview of Data Set
+
+
+
+## Plan for Exploratory Analysis
