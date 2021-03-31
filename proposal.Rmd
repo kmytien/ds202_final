@@ -24,6 +24,7 @@ The author of the dataset is Yamac Eren Ay. He chose Spotify to collect all his 
 ## Plan for Exploratory Analysis
 
 **Questions we are planning on researching:**
+
 1. Does a success of a song depend on the date of the song released?
 
 2. Does the popularity of a song depend on the danceability and loudness?
