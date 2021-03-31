@@ -9,32 +9,42 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#### Team Members: MyTien Kien, Tanner Dunn, Ryan Pate, Saketh Jonnadula
-#### Project Coordinator: MyTien Kien
+#### **Team Members:** MyTien Kien, Tanner Dunn, Ryan Pate, Saketh Jonnadula
+#### **Project Coordinator:** MyTien Kien
 
-## Data Set
-https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks?select=data.csv
+## **Data Set**
+https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks
 
-## Motivation of Study
-As college students, most of us listen to music pretty often. With that, we chose to explore data about different music tastes, how well songs do, what makes a song successful and so on. 
 
-## Overview of Data Set
-The author of the dataset is Yamac Eren Ay. He chose Spotify to collect all his data from in respect to year given. Given the features of each song, he collected data on how well the song did, how popular the artist is, how danceable a song is, as well as other features relating to audio.
+## **Motivation of Study**
+Millions of people in the world listen to music, whether they're in a happy, sad, or angry mood. Music is where most of us go to when we want to relax, sing, or just to listen. With that, our group decided that since we all listen to music pretty frequently, it would be interesting to look into a data set based on what makes a song "good" with the factors given in this data set (energy, liveness, danceability, etc). 
 
-## Plan for Exploratory Analysis
+Music is a huge part in a lot of peoples' lives, not to forget, cultures and traditions as well. Although the likeability of a song depends on peoples' opinions and their taste, we thought it would be cool to see how Spotify would distinguish a "good" song from a "bad" song.
 
-**Questions we are planning on researching:**
 
-1. Does a success of a song depend on the date of the song released?
+## **Overview of Data Set**
+The author of the data set is Yamac Eren Ay. Yamac is a self-taught data scientist from Germany who is currently going to EYU. On Kaggle, he's known to be a dataset expert, with this specific data set being his most popular.
 
-2. Does the popularity of a song depend on the danceability and loudness?
+From the description, Yamac, who is also a music enthusiast, decided to create this data set as he hasn't seen anything similar to it on the internet. Yamac chose Spotify to collect all his data from, resulting in 5 different excel files (located in the excel_files folder). The five excel files include Spotify data based on genres, artist, year, and the overall data set. He included up to 175,000 songs in these data sets.
 
-3. What is the relationship between energy and loudness in a song?
+This data set was made in May of 2020, and was recently updated to include songs up until January 2021 (from 1921). Most of these data sets has data that tells us whether a certain song/artist/genre did well or not (based on popularity and other factors). As well as what factors make up a successful song, for example, the danceability, liveness, loudness etc. We plan to use these factors to help answer our questions below.
 
-4. How does the popularity of the artist affect how successful the song
+
+## **Plan for Exploratory Analysis**
+Here are some questions that we came up as we planned out this proposal. We'll possibly think of more as we continue our final project.
+
+### *Questions we are planning on researching:*
+
+**1.** Does a success of a song depend on the date of the song released?
+
+**2.** Does the popularity of a song depend on the danceability and loudness?
+
+**3.** What is the relationship between energy and loudness in a song?
+
+**4.** How does the popularity of the artist affect how successful the song
 will be?
 
-5. Analyze relationship between temp and acousticness.
+**5.** Analyze relationship between temp and acousticness.
 
-6. What is the greatest predictor of a song's popularity?
+**6.** What is the greatest predictor of a song's popularity?
 
