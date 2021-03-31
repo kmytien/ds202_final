@@ -13,14 +13,27 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Project Coordinator: MyTien Kien
 
 ## Data Set
-https://www.kaggle.com/sudalairajkumar/covid19-in-usa#us_states_covid19_daily.csv
+https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks?select=data.csv
 
 ## Motivation of Study
-
-
+As college students, most of us listen to music pretty often. With that, we chose to explore data about different music tastes, how well songs do, what makes a song successful and so on. 
 
 ## Overview of Data Set
-
-
+The author of the dataset is Yamac Eren Ay. He chose Spotify to collect all his data from in respect to year given. Given the features of each song, he collected data on how well the song did, how popular the artist is, how danceable a song is, as well as other features relating to audio.
 
 ## Plan for Exploratory Analysis
+
+**Questions we are planning on researching:**
+1. Does a success of a song depend on the date of the song released?
+
+2. Does the popularity of a song depend on the danceability and loudness?
+
+3. What is the relationship between energy and loudness in a song?
+
+4. How does the popularity of the artist affect how successful the song
+will be?
+
+5. Analyze relationship between temp and acousticness.
+
+6. What is the greatest predictor of a song's popularity?
+
