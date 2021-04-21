@@ -1,0 +1,91 @@
+---
+title: "MyTien's Analysis"
+author: "MyTien Kien; kmytien"
+date: "4/21/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r warning=FALSE, message=FALSE}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+main <- readr::read_csv('./excel_files/data.csv')
+by_artist <- readr::read_csv('./excel_files/data_by_artist.csv')
+by_genre <- readr::read_csv('./excel_files/data_by_genres.csv')
+by_year <- readr::read_csv('./excel_files/data_by_year.csv')
+
+main <- drop_na(main)
+```
+
+## Final Project Questions
+
+**1.** Does a success of a song depend on the date of the song released?
+```{r}
+
+```
+
+
+**2.** Does the popularity of a song depend on the danceability and loudness?
+```{r}
+
+```
+
+
+**3.** What is the relationship between energy and loudness in a song?
+```{r}
+#Going to go more into depth, just starting for now
+q3 <- main %>% ggplot(aes(x = loudness, y = energy)) + geom_point() +
+      ggtitle("Loudness v.s. Energy")
+q3
+```
+
+
+**4.** How does the popularity of the artist affect how successful the song will be?
+```{r}
+#Going to measure success of a song by danceability - can change later if needed
+
+#Low Danceability
+dance_low <- main %>% filter(danceability <= 0.5) %>%
+      select(artists, popularity, name, danceability)
+
+#High Danceability
+dance_high <- main %>% filter(danceability > 0.5) %>%
+      select(artists, popularity, name, danceability)
+```
+
+```{r}
+#Plot for Low Danceability - ggplot?
+
+#Plot for High Danceability
+
+```
+
+
+**5.** Analyze relationship between temp and acousticness.
+```{r}
+
+```
+
+
+**6.** What is the greatest predictor of a song's popularity?
+```{r}
+
+```
+
+
+**7.**
+```{r}
+
+```
+
+
+**8.**
+```{r}
+
+```
+
