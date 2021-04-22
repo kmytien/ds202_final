@@ -36,33 +36,40 @@ main <- drop_na(main)
 ```
 
 
-**3.** What is the relationship between energy and loudness in a song?
+**3.** What were the five most popular songs in 2020? Is there a correlation with popularity and energy?
 ```{r}
-#Going to go more into depth, just starting for now
-q3 <- main %>% ggplot(aes(x = loudness, y = energy)) + geom_point() +
-      ggtitle("Loudness v.s. Energy")
-q3
+#not finished
+q3 <- main %>%
+      filter(year == 2020) %>%
+      select(artists, name, popularity, energy) %>%
+      arrange(desc(popularity)) %>%
+      head(5)
+
 ```
 
 
-**4.** How does the popularity of the artist affect how successful the song will be?
+**4.** Analyze how song trends (danceability, energy, etc..), changed throughout each year.
 ```{r}
-#Going to measure success of a song by danceability - can change later if needed
+q4 <- main %>% 
+      group_by(year) %>%
+      summarise(danceability = mean(danceability),
+                acousticness = mean(acousticness),
+                energy = mean(energy),
+                valence = mean(valence),
+                liveness = mean(liveness))
 
-#Low Danceability
-dance_low <- main %>% filter(danceability <= 0.5) %>%
-      select(artists, popularity, name, danceability)
-
-#High Danceability
-dance_high <- main %>% filter(danceability > 0.5) %>%
-      select(artists, popularity, name, danceability)
+q4
 ```
 
 ```{r}
-#Plot for Low Danceability - ggplot?
+#Plot for song trends
+q4 <- q4 %>% pivot_longer(danceability:liveness, names_to = 'trend', values_to = 'value')
 
-#Plot for High Danceability
+q4_plot <- q4 %>% 
+      ggplot(aes(x = year, y = value, color = trend)) + geom_line() + 
+      ggtitle("Trends Throughout the Years")
 
+q4_plot
 ```
 
 
