@@ -36,16 +36,26 @@ main <- drop_na(main)
 ```
 
 
-**3.** What were the five most popular songs in 2020? Is there a correlation with popularity and energy?
+**3.** What were the five most popular songs in 2020? How do these songs compare to the top five songs in 2010?
 ```{r}
-#not finished
-q3 <- main %>%
+#Top 5 for 2020
+q3_2020 <- main %>%
       filter(year == 2020) %>%
-      select(artists, name, popularity, energy) %>%
+      select(year, artists, name, popularity, energy) %>%
       arrange(desc(popularity)) %>%
-      head(5)
+      head(n = 10)
+q3_2020
 
+#Top 5 for 2010
+q3_2010 <- main %>%
+      filter(year == 2010) %>%
+      select(year, artists, name, popularity, energy) %>%
+      arrange(desc(popularity)) %>%
+      head(n = 10)
+q3_2010
 ```
+
+The year, 2020, had a higher popularity rate than those in 2010, with the highest rating being 96, compared to the highest of 83 in 2010. Last year also had a lot more diverse songs that were in the top charts, with artists including Bad Bunny, Rosalia, and genres such as ... Overall, a lot has changed regarding what kind of songs/artists Spotify customers listen to in contrast to 10-11 years back.
 
 
 **4.** Analyze how song trends (danceability, energy, etc..), changed throughout each year.
@@ -61,6 +71,9 @@ q4 <- main %>%
 q4
 ```
 
+I made a dataframe that grouped the averages of danceability, acousticness, energy, valence, and liveness by each year, to see how much has changed from year to year. The following chart will help us visualize the changes.
+
+
 ```{r}
 #Plot for song trends
 q4 <- q4 %>% pivot_longer(danceability:liveness, names_to = 'trend', values_to = 'value')
@@ -71,6 +84,8 @@ q4_plot <- q4 %>%
 
 q4_plot
 ```
+
+According to this chart, the trend that had the most drastic change in the last century is acousticness. Before 1950, acousticness was very popular among songs, until it reached a huge downfall through the years of 1950 to 2000. The trend that grew was the energy level of songs - this lead to it being the highest trend in the past few years. All the other song trends are pretty leveled out, with liveness of a song being the lowest for the majority of the past century.
 
 
 **5.** Analyze relationship between temp and acousticness.
