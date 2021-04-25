@@ -1,5 +1,5 @@
 ---
-title: "Team 4 DS202 Final Project"
+title: "DS202 Final Project: Group 4"
 author: "MyTien Kien, Tanner Dunn"
 date: "4/21/2021"
 output: html_document
@@ -94,9 +94,9 @@ According to this chart, the trend that had the most drastic change in the last 
 ```
 
 
-**6.** What is the greatest predictor of a song's popularity? 
+**6.** Insert New Question
 ```{r}
-#This is more of a regression problem which was not covered in this class (Maybe Remove?)
+
 ```
 
 
@@ -130,10 +130,3 @@ ggplot(dat, aes(x = year, weight = popularity)) + geom_bar() + ylab('Popularity'
 ```
 
 Post Malone has dropped 3 albums, the first in 2016, second in 2018, and the third in 2019, therefore those are the years he has a popularity value. It is clear that he is becoming more and more popular with each album that he releases. 
-
-
-**9.**
-```{r}
-
-```
-
