@@ -163,5 +163,7 @@ ggplot(q9, aes(x=reorder(genres,popularity), y = popularity)) + geom_point(col="
    coord_flip()
 ```
 
+I found these genres quite surprising as the most popular. After further thought, it would make sense to see a Chinese favored genre as the most popular given they are the largest country in the world by population.
+
 
 
