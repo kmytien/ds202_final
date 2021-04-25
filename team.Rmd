@@ -119,8 +119,7 @@ one_hit_wonder <- main %>%
       top_n(5, wt = Popularity)
 
 ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularity)) + geom_bar() + coord_cartesian(ylim=c(75,100)) +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + xlab("Artists") + ylab("Popularity") + 
-      ggtitle("Most Popular One Hit Wonders") + coord_flip()
+      xlab("Artists") + ylab("Popularity") + ggtitle("Most Popular One Hit Wonders") + coord_flip()
 ```
 
 Now that we found the popular one hit wonder artists or groups, lets look at the one song they released
