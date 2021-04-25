@@ -20,6 +20,8 @@ by_genre <- readr::read_csv('./excel_files/data_by_genres.csv')
 by_year <- readr::read_csv('./excel_files/data_by_year.csv')
 
 main <- drop_na(main)
+by_year <- drop_na(by_year)
+by_genre <- drop_na(by_genre)
 ```
 
 ## Final Project Questions
@@ -37,21 +39,24 @@ q1
 Based on this graph it looks like a songs "success" or popularity doesnt matter when it was released as there is no patteren to why songs are popular in some years compared to other years.
 
 
-**2.** Does the popularity of a song depend on the danceability and loudness?
+**2.** Does popularity depend on if the song is explicit?
 ```{r}
 q2 <- main %>% 
       group_by(popularity) %>%
-     select(popularity, artists, name, danceability, loudness) %>% arrange(desc(popularity)) %>%
-      head(n = 10)
+      select(popularity, artists, name, danceability, energy) %>% arrange(desc(popularity)) %>%
+      head(n = 20)
 q2
 ```
+
+You can see that for a song to be decently popular that the song needs to have a balance between dancebility and energy. The song cant have the biggest dancebility without the same level of energy the only outlier from this is that Bille Eilish's songs are all catchy but have little to no energy so it makes sense why her numbers are the way that they are.
+
 
 **3.** What were the five most popular songs in 2020? How do these songs compare to the top five songs in 2010?
 ```{r}
 #Top 5 for 2020
 q3_2020 <- main %>%
       filter(year == 2020) %>%
-      select(year, artists, name, popularity, energy) %>%
+      select(year, artists, name, popularity) %>%
       arrange(desc(popularity)) %>%
       head(n = 5)
 q3_2020
@@ -59,7 +64,7 @@ q3_2020
 #Top 5 for 2010
 q3_2010 <- main %>%
       filter(year == 2010) %>%
-      select(year, artists, name, popularity, energy) %>%
+      select(year, artists, name, popularity) %>%
       arrange(desc(popularity)) %>%
       head(n = 5)
 q3_2010
@@ -113,12 +118,13 @@ According to this chart, the trend that had the most drastic change in the last 
 **7.** Who are the most popular one hit wonders?
 ```{r}
 one_hit_wonder <- main %>% 
-   group_by(artists = artists) %>%
-   summarise(Num_track = n(), Popularity = mean(popularity)) %>%
-   filter(Num_track == 1) %>%
-   top_n(5, wt = Popularity)
+      group_by(artists = artists) %>%
+      summarise(Num_track = n(), Popularity = mean(popularity)) %>%
+      filter(Num_track == 1) %>%
+      top_n(5, wt = Popularity)
 
-   ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularity)) + geom_bar() + coord_cartesian(ylim=c(75,100)) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + ylab("Popularity") + ggtitle("Most Popular One Hit Wonders")
+ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularity)) + geom_bar() + coord_cartesian(ylim=c(75,100)) +
+      xlab("Artists") + ylab("Popularity") + ggtitle("Most Popular One Hit Wonders") + coord_flip()
 ```
 
 Now that we found the popular one hit wonder artists or groups, lets look at the one song they released
@@ -128,7 +134,7 @@ summarise(one_hit_names, name, artists)
 ```
 
 
-**8.** How has Post Malone (My Favorite Artist) Popularity changed over the past few years
+**8.** How has Post Malone (my favorite artist) Popularity changed over the past few years
 ```{r}
 dat <- main %>%
    group_by(year = year, artists = artists) %>%
