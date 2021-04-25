@@ -20,6 +20,8 @@ by_genre <- readr::read_csv('./excel_files/data_by_genres.csv')
 by_year <- readr::read_csv('./excel_files/data_by_year.csv')
 
 main <- drop_na(main)
+by_year <- drop_na(by_year)
+by_genre <- drop_na(by_genre)
 ```
 
 ## Final Project Questions
@@ -37,14 +39,17 @@ q1
 Based on this graph it looks like a songs "success" or popularity doesnt matter when it was released as there is no patteren to why songs are popular in some years compared to other years.
 
 
-**2.** Does the popularity of a song depend on the danceability and loudness?
+**2.** Does popularity depend on if the song is explicit?
 ```{r}
 q2 <- main %>% 
       group_by(popularity) %>%
-     select(popularity, artists, name, danceability, loudness) %>% arrange(desc(popularity)) %>%
-      head(n = 10)
+      select(popularity, artists, name, danceability, energy) %>% arrange(desc(popularity)) %>%
+      head(n = 20)
 q2
 ```
+
+You can see that for a song to be decently popular that the song needs to have a balance between dancebility and energy. The song cant have the biggest dancebility without the same level of energy the only outlier from this is that Bille Eilish's songs are all catchy but have little to no energy so it makes sense why her numbers are the way that they are.
+
 
 **3.** What were the five most popular songs in 2020? How do these songs compare to the top five songs in 2010?
 ```{r}
