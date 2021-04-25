@@ -205,7 +205,8 @@ by_genre &lt;- readr::read_csv(&#39;./excel_files/data_by_genres.csv&#39;)
 by_year &lt;- readr::read_csv(&#39;./excel_files/data_by_year.csv&#39;)
 
 main &lt;- drop_na(main)
-by_year &lt;- drop_na(by_year)</code></pre>
+by_year &lt;- drop_na(by_year)
+by_genre &lt;- drop_na(by_genre)</code></pre>
 <div id="final-project-questions" class="section level2">
 <h2>Final Project Questions</h2>
 <p><strong>1.</strong> Does a success of a song depend on the date of the song released?</p>
@@ -242,33 +243,33 @@ q1</code></pre>
 <p><strong>2.</strong> Does the popularity of a song depend on the danceability and loudness?</p>
 <pre class="r"><code>q2 &lt;- main %&gt;% 
       group_by(popularity) %&gt;%
-     select(popularity, artists, name, danceability, loudness) %&gt;% arrange(desc(popularity)) %&gt;%
+      select(popularity, artists, name, danceability, energy) %&gt;% arrange(desc(popularity)) %&gt;%
       head(n = 20)
 q2</code></pre>
 <pre><code>## # A tibble: 20 x 5
 ## # Groups:   popularity [7]
-##    popularity artists                 name                 danceability loudness
-##         &lt;dbl&gt; &lt;chr&gt;                   &lt;chr&gt;                       &lt;dbl&gt;    &lt;dbl&gt;
-##  1        100 [&#39;Olivia Rodrigo&#39;]      drivers license             0.585    -8.76
-##  2         96 [&#39;24kGoldn&#39;, &#39;iann dio… Mood (feat. iann di…        0.7      -3.56
-##  3         96 [&#39;Ariana Grande&#39;]       positions                   0.737    -4.77
-##  4         95 [&#39;Bad Bunny&#39;, &#39;Jhay Co… DÁKITI                      0.731   -10.1 
-##  5         95 [&#39;KAROL G&#39;]             BICHOTA                     0.863    -4.16
-##  6         94 [&#39;Ariana Grande&#39;]       34+35                       0.83     -6.48
-##  7         94 [&#39;CJ&#39;]                  Whoopty                     0.711    -7.62
-##  8         94 [&#39;The Kid LAROI&#39;]       WITHOUT YOU                 0.662    -7.36
-##  9         94 [&#39;Billie Eilish&#39;]       Therefore I Am              0.889    -7.77
-## 10         94 [&#39;Bad Bunny&#39;, &#39;ROSALÍA… LA NOCHE DE ANOCHE          0.856    -4.89
-## 11         93 [&#39;Pop Smoke&#39;]           What You Know Bout …        0.709    -8.49
-## 12         93 [&#39;Tate McRae&#39;]          you broke me first          0.642    -9.39
-## 13         92 [&#39;Cardi B&#39;, &#39;Megan The… WAP (feat. Megan Th…        0.935    -7.51
-## 14         92 [&#39;Lil Nas X&#39;]           HOLIDAY                     0.81     -6.92
-## 15         92 [&#39;Justin Bieber&#39;, &#39;ben… Lonely (with benny …        0.631    -7.07
-## 16         92 [&#39;Justin Bieber&#39;]       Anyone                      0.686    -8.03
-## 17         92 [&#39;Tiësto&#39;]              The Business                0.798    -7.08
-## 18         92 [&#39;Boza&#39;]                Hecha Pa&#39; Mi                0.725    -5.01
-## 19         91 [&#39;Sia&#39;]                 Snowman                     0.716    -6.26
-## 20         91 [&#39;Harry Styles&#39;]        Watermelon Sugar            0.548    -4.21</code></pre>
+##    popularity artists                  name                  danceability energy
+##         &lt;dbl&gt; &lt;chr&gt;                    &lt;chr&gt;                        &lt;dbl&gt;  &lt;dbl&gt;
+##  1        100 [&#39;Olivia Rodrigo&#39;]       drivers license              0.585  0.436
+##  2         96 [&#39;24kGoldn&#39;, &#39;iann dior… Mood (feat. iann dio…        0.7    0.722
+##  3         96 [&#39;Ariana Grande&#39;]        positions                    0.737  0.802
+##  4         95 [&#39;Bad Bunny&#39;, &#39;Jhay Cor… DÁKITI                       0.731  0.573
+##  5         95 [&#39;KAROL G&#39;]              BICHOTA                      0.863  0.666
+##  6         94 [&#39;Ariana Grande&#39;]        34+35                        0.83   0.585
+##  7         94 [&#39;CJ&#39;]                   Whoopty                      0.711  0.598
+##  8         94 [&#39;The Kid LAROI&#39;]        WITHOUT YOU                  0.662  0.413
+##  9         94 [&#39;Billie Eilish&#39;]        Therefore I Am               0.889  0.34 
+## 10         94 [&#39;Bad Bunny&#39;, &#39;ROSALÍA&#39;] LA NOCHE DE ANOCHE           0.856  0.618
+## 11         93 [&#39;Pop Smoke&#39;]            What You Know Bout L…        0.709  0.548
+## 12         93 [&#39;Tate McRae&#39;]           you broke me first           0.642  0.374
+## 13         92 [&#39;Cardi B&#39;, &#39;Megan Thee… WAP (feat. Megan The…        0.935  0.454
+## 14         92 [&#39;Lil Nas X&#39;]            HOLIDAY                      0.81   0.511
+## 15         92 [&#39;Justin Bieber&#39;, &#39;benn… Lonely (with benny b…        0.631  0.239
+## 16         92 [&#39;Justin Bieber&#39;]        Anyone                       0.686  0.538
+## 17         92 [&#39;Tiësto&#39;]               The Business                 0.798  0.62 
+## 18         92 [&#39;Boza&#39;]                 Hecha Pa&#39; Mi                 0.725  0.756
+## 19         91 [&#39;Sia&#39;]                  Snowman                      0.716  0.512
+## 20         91 [&#39;Harry Styles&#39;]         Watermelon Sugar             0.548  0.816</code></pre>
 <p>I think this is what we need lmk if i need to change this</p>
 </div>
 
