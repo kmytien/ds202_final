@@ -51,7 +51,7 @@ q2
 #Top 5 for 2020
 q3_2020 <- main %>%
       filter(year == 2020) %>%
-      select(year, artists, name, popularity, energy) %>%
+      select(year, artists, name, popularity) %>%
       arrange(desc(popularity)) %>%
       head(n = 5)
 q3_2020
@@ -59,7 +59,7 @@ q3_2020
 #Top 5 for 2010
 q3_2010 <- main %>%
       filter(year == 2010) %>%
-      select(year, artists, name, popularity, energy) %>%
+      select(year, artists, name, popularity) %>%
       arrange(desc(popularity)) %>%
       head(n = 5)
 q3_2010

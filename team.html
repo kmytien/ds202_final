@@ -262,33 +262,33 @@ q2</code></pre>
 <pre class="r"><code>#Top 5 for 2020
 q3_2020 &lt;- main %&gt;%
       filter(year == 2020) %&gt;%
-      select(year, artists, name, popularity, energy) %&gt;%
+      select(year, artists, name, popularity) %&gt;%
       arrange(desc(popularity)) %&gt;%
       head(n = 5)
 q3_2020</code></pre>
-<pre><code>## # A tibble: 5 x 5
-##    year artists                      name                   popularity energy
-##   &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;                       &lt;dbl&gt;  &lt;dbl&gt;
-## 1  2020 [&#39;24kGoldn&#39;, &#39;iann dior&#39;]    Mood (feat. iann dior)         96  0.722
-## 2  2020 [&#39;Ariana Grande&#39;]            positions                      96  0.802
-## 3  2020 [&#39;Bad Bunny&#39;, &#39;Jhay Cortez&#39;] DÁKITI                         95  0.573
-## 4  2020 [&#39;KAROL G&#39;]                  BICHOTA                        95  0.666
-## 5  2020 [&#39;Ariana Grande&#39;]            34+35                          94  0.585</code></pre>
+<pre><code>## # A tibble: 5 x 4
+##    year artists                      name                   popularity
+##   &lt;dbl&gt; &lt;chr&gt;                        &lt;chr&gt;                       &lt;dbl&gt;
+## 1  2020 [&#39;24kGoldn&#39;, &#39;iann dior&#39;]    Mood (feat. iann dior)         96
+## 2  2020 [&#39;Ariana Grande&#39;]            positions                      96
+## 3  2020 [&#39;Bad Bunny&#39;, &#39;Jhay Cortez&#39;] DÁKITI                         95
+## 4  2020 [&#39;KAROL G&#39;]                  BICHOTA                        95
+## 5  2020 [&#39;Ariana Grande&#39;]            34+35                          94</code></pre>
 <pre class="r"><code>#Top 5 for 2010
 q3_2010 &lt;- main %&gt;%
       filter(year == 2010) %&gt;%
-      select(year, artists, name, popularity, energy) %&gt;%
+      select(year, artists, name, popularity) %&gt;%
       arrange(desc(popularity)) %&gt;%
       head(n = 5)
 q3_2010</code></pre>
-<pre><code>## # A tibble: 5 x 5
-##    year artists                name                            popularity energy
-##   &lt;dbl&gt; &lt;chr&gt;                  &lt;chr&gt;                                &lt;dbl&gt;  &lt;dbl&gt;
-## 1  2010 [&#39;John Lennon&#39;, &#39;Yoko~ Happy Xmas (War Is Over) - Rem~         83  0.64 
-## 2  2010 [&#39;Train&#39;]              Hey, Soul Sister                        82  0.886
-## 3  2010 [&#39;Kesha&#39;]              TiK ToK                                 81  0.837
-## 4  2010 [&#39;Eminem&#39;, &#39;Rihanna&#39;]  Love The Way You Lie                    81  0.925
-## 5  2010 [&#39;Miguel&#39;]             Sure Thing                              80  0.603</code></pre>
+<pre><code>## # A tibble: 5 x 4
+##    year artists                  name                                 popularity
+##   &lt;dbl&gt; &lt;chr&gt;                    &lt;chr&gt;                                     &lt;dbl&gt;
+## 1  2010 [&#39;John Lennon&#39;, &#39;Yoko O~ Happy Xmas (War Is Over) - Remaster~         83
+## 2  2010 [&#39;Train&#39;]                Hey, Soul Sister                             82
+## 3  2010 [&#39;Kesha&#39;]                TiK ToK                                      81
+## 4  2010 [&#39;Eminem&#39;, &#39;Rihanna&#39;]    Love The Way You Lie                         81
+## 5  2010 [&#39;Miguel&#39;]               Sure Thing                                   80</code></pre>
 <p>The year, 2020, had a higher popularity rate than those in 2010, with the highest rating being 96, compared to the highest of 83 in 2010. Last year also had a lot more diverse songs that were in the top charts, with artists including Bad Bunny, Rosalia, and genres such as … Overall, a lot has changed regarding what kind of songs/artists Spotify customers listen to in contrast to 10-11 years back.</p>
 <p><strong>4.</strong> Analyze how song trends (danceability, energy, etc..), changed throughout each year.</p>
 <pre class="r"><code>q4 &lt;- main %&gt;% 
