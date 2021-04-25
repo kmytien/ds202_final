@@ -1,0 +1,149 @@
+---
+title: "Sakeths_analysis"
+author: "Saketh Jonnadula"
+date: "4/24/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r warning=FALSE, message=FALSE}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+main <- readr::read_csv('./excel_files/data.csv')
+by_artist <- readr::read_csv('./excel_files/data_by_artist.csv')
+by_genre <- readr::read_csv('./excel_files/data_by_genres.csv')
+by_year <- readr::read_csv('./excel_files/data_by_year.csv')
+
+main <- drop_na(main)
+by_year <- drop_na(by_year)
+```
+
+## Final Project Questions
+
+**1.** Does a success of a song depend on the date of the song released?
+```{r}
+q1 <- by_year %>% 
+      group_by(year) %>%
+      select(year, popularity) %>%
+      arrange(desc(popularity)) %>%
+      head(n = 20)
+q1
+```
+
+Based on this graph it looks like a songs "success" or popularity doesnt matter when it was released as there is no patteren to why songs are popular in some years compared to other years.
+
+
+**2.** Does the popularity of a song depend on the danceability and loudness?
+```{r}
+q2 <- main %>% 
+      group_by(popularity) %>%
+     select(popularity, artists, name, danceability, loudness) %>% arrange(desc(popularity)) %>%
+      head(n = 10)
+q2
+```
+
+I think this is what we need lmk if i need to change this
+
+
+**3.** What were the five most popular songs in 2020? How do these songs compare to the top five songs in 2010?
+```{r}
+#Top 5 for 2020
+q3_2020 <- main %>%
+      filter(year == 2020) %>%
+      select(year, artists, name, popularity, energy) %>%
+      arrange(desc(popularity)) %>%
+      head(n = 10)
+q3_2020
+
+#Top 5 for 2010
+q3_2010 <- main %>%
+      filter(year == 2010) %>%
+      select(year, artists, name, popularity, energy) %>%
+      arrange(desc(popularity)) %>%
+      head(n = 10)
+q3_2010
+```
+
+The year, 2020, had a higher popularity rate than those in 2010, with the highest rating being 96, compared to the highest of 83 in 2010. Last year also had a lot more diverse songs that were in the top charts, with artists including Bad Bunny, Rosalia, and genres such as ... Overall, a lot has changed regarding what kind of songs/artists Spotify customers listen to in contrast to 10-11 years back.
+
+
+**4.** Analyze how song trends (danceability, energy, etc..), changed throughout each year.
+```{r}
+q4 <- main %>% 
+      group_by(year) %>%
+      summarise(danceability = mean(danceability),
+                acousticness = mean(acousticness),
+                energy = mean(energy),
+                valence = mean(valence),
+                liveness = mean(liveness))
+
+q4
+```
+
+I made a dataframe that grouped the averages of danceability, acousticness, energy, valence, and liveness by each year, to see how much has changed from year to year. The following chart will help us visualize the changes.
+
+
+```{r}
+#Plot for song trends
+q4 <- q4 %>% pivot_longer(danceability:liveness, names_to = 'trend', values_to = 'value')
+
+q4_plot <- q4 %>% 
+      ggplot(aes(x = year, y = value, color = trend)) + geom_line() + 
+      ggtitle("Trends Throughout the Years")
+
+q4_plot
+```
+
+According to this chart, the trend that had the most drastic change in the last century is acousticness. Before 1950, acousticness was very popular among songs, until it reached a huge downfall through the years of 1950 to 2000. The trend that grew was the energy level of songs - this lead to it being the highest trend in the past few years. All the other song trends are pretty leveled out, with liveness of a song being the lowest for the majority of the past century.
+
+
+**5.** Analyze relationship between temp and acousticness.
+```{r}
+
+```
+
+
+**6.** What is the greatest predictor of a song's popularity? 
+```{r}
+#This is more of a regression problem which was not covered in this class (Maybe Remove?)
+```
+
+
+**7.** Who are the most popular one hit wonders?
+```{r}
+one_hit_wonder <- main %>% 
+   group_by(artists = artists) %>%
+   summarise(Num_track = n(), Popularity = mean(popularity)) %>%
+   filter(Num_track == 1) %>%
+   top_n(5, wt = Popularity)
+
+   ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularity)) + geom_bar() + coord_cartesian(ylim=c(75,100)) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + ylab("Popularity") + ggtitle("Most Popular One Hit Wonders")
+```
+
+Now that we found the popular one hit wonder artists or groups, lets look at the one song they released
+```{r}
+one_hit_names <- inner_join(main, one_hit_wonder, by = 'artists')
+summarise(one_hit_names, name, artists)
+```
+
+
+**8.** How has Post Malone (My Favorite Artist) Popularity changed over the past few years
+```{r}
+dat <- main %>%
+   group_by(year = year, artists = artists) %>%
+   summarise(popularity = mean(popularity)) %>%
+   filter(artists == "['Post Malone']")
+
+ggplot(dat, aes(x = year, weight = popularity)) + geom_bar() + ylab('Popularity') + coord_cartesian(ylim=c(60, 80))
+   
+```
+
+Post Malone has dropped 3 albums, the first in 2016, second in 2018, and the third in 2019, therefore those are the years he has a popularity value. It is clear that he is becoming more and more popular with each album that he releases. 
+
+
