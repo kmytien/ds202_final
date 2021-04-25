@@ -210,12 +210,11 @@ main &lt;- drop_na(main)</code></pre>
 <p><strong>1.</strong> Does a success of a song depend on the date of the song released?</p>
 <pre class="r"><code>q1 &lt;- by_year %&gt;% 
       group_by(year) %&gt;%
-      select(year, popularity) %&gt;%
+      summarize(popularity = mean(popularity)) %&gt;% 
       arrange(desc(popularity)) %&gt;%
       head(n = 20)
 q1</code></pre>
 <pre><code>## # A tibble: 20 x 2
-## # Groups:   year [20]
 ##     year popularity
 ##    &lt;dbl&gt;      &lt;dbl&gt;
 ##  1  2001       50.9
