@@ -26,15 +26,25 @@ main <- drop_na(main)
 
 **1.** Does a success of a song depend on the date of the song released?
 ```{r}
-
+q1 <- by_year %>% 
+      group_by(year) %>%
+      select(year, popularity) %>%
+      arrange(desc(popularity)) %>%
+      head(n = 20)
+q1
 ```
+
+Based on this graph it looks like a songs "success" or popularity doesnt matter when it was released as there is no patteren to why songs are popular in some years compared to other years.
 
 
 **2.** Does the popularity of a song depend on the danceability and loudness?
 ```{r}
-
+q2 <- main %>% 
+      group_by(popularity) %>%
+     select(popularity, artists, name, danceability, loudness) %>% arrange(desc(popularity)) %>%
+      head(n = 10)
+q2
 ```
-
 
 **3.** What were the five most popular songs in 2020? How do these songs compare to the top five songs in 2010?
 ```{r}
