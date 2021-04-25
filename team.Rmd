@@ -28,7 +28,7 @@ main <- drop_na(main)
 ```{r}
 q1 <- by_year %>% 
       group_by(year) %>%
-      select(year, popularity) %>%
+      summarize(popularity = mean(popularity)) %>% 
       arrange(desc(popularity)) %>%
       head(n = 20)
 q1
