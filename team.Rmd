@@ -118,12 +118,13 @@ According to this chart, the trend that had the most drastic change in the last 
 **7.** Who are the most popular one hit wonders?
 ```{r}
 one_hit_wonder <- main %>% 
-   group_by(artists = artists) %>%
-   summarise(Num_track = n(), Popularity = mean(popularity)) %>%
-   filter(Num_track == 1) %>%
-   top_n(5, wt = Popularity)
+      group_by(artists = artists) %>%
+      summarise(Num_track = n(), Popularity = mean(popularity)) %>%
+      filter(Num_track == 1) %>%
+      top_n(5, wt = Popularity)
 
-   ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularity)) + geom_bar() + coord_cartesian(ylim=c(75,100)) + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + ylab("Popularity") + ggtitle("Most Popular One Hit Wonders")
+ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularity)) + geom_bar() + coord_cartesian(ylim=c(75,100)) +
+      xlab("Artists") + ylab("Popularity") + ggtitle("Most Popular One Hit Wonders") + coord_flip()
 ```
 
 Now that we found the popular one hit wonder artists or groups, lets look at the one song they released
@@ -133,7 +134,7 @@ summarise(one_hit_names, name, artists)
 ```
 
 
-**8.** How has Post Malone (My Favorite Artist) Popularity changed over the past few years
+**8.** How has Post Malone (my favorite artist) Popularity changed over the past few years
 ```{r}
 dat <- main %>%
    group_by(year = year, artists = artists) %>%
