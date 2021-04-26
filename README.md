@@ -5,7 +5,7 @@
 - Owner of data is Yamac Eren Ay
 - More information about this project in project_proposal and project_report
 
-### **Team Members**
+### **Group 4 Team Members**
 - MyTien Kien (*kmytien*)
 - Ryan Pate (*ryanpate*)
 - Saketh Jonnadula (*venkataj*)
