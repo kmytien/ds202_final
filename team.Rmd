@@ -103,15 +103,26 @@ q4_plot
 According to this chart, the trend that had the most drastic change in the last century is acousticness. Before 1950, acousticness was very popular among songs, until it reached a huge downfall through the years of 1950 to 2000. The trend that grew was the energy level of songs - this lead to it being the highest trend in the past few years. All the other song trends are pretty leveled out, with liveness of a song being the lowest for the majority of the past century.
 
 
-**5.** Analyze relationship between temp and acousticness.
+5. What is the relationship between the tempo of a song and the acousticness?
+
+    ```{r}
+ggplot(main, aes(x=tempo, y=acousticness)) + 
+      geom_point(size=0.1) +
+      labs(title="Song Acousticness vs. Tempo", x="Tempo", y="Acoustic Probability")
+    ```
+    
+6. Are explicit songs more popular than non-explicit songs?
+
 ```{r}
-
-```
-
-
-**6.** Insert New Question
-```{r}
-
+main75 <- subset(main, popularity>=75)
+main75$explicit <- as.character(main75$explicit)
+    
+ggplot(main75, aes(x=popularity, fill=explicit)) + 
+      geom_histogram(binwidth = 1) +
+      labs(title="Popularity of Explicit and Non-Explicit Songs", x="Popularity (between 75 and 100)", y="Count") +
+      theme(plot.title = element_text(size=14, hjust=0.5)) +
+      theme(legend.title = element_blank()) +
+      scale_fill_discrete(labels = c("Non-Explicit", "Explicit"))
 ```
 
 
