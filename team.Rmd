@@ -105,11 +105,11 @@ According to this chart, the trend that had the most drastic change in the last 
 
 5. What is the relationship between the tempo of a song and the acousticness?
 
-    ```{r}
+```{r}
 ggplot(main, aes(x=tempo, y=acousticness)) + 
       geom_point(size=0.1) +
       labs(title="Song Acousticness vs. Tempo", x="Tempo", y="Acoustic Probability")
-    ```
+```
     
 6. Are explicit songs more popular than non-explicit songs?
 
