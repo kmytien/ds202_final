@@ -1,0 +1,43 @@
+---
+title: "Final"
+author: "Ryan Pate"
+date: "4/25/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+main <- readr::read_csv('/Users/ryanpate/Downloads/data.csv')
+
+
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+```
+
+## Final Project Questions
+
+5. What is the relationship between the tempo of a song and the acousticness?
+
+    ```{r}
+    ggplot(main, aes(x=tempo, y=acousticness)) + 
+  geom_point(size=0.1) +
+  labs(title="Song Acousticness vs. Tempo", x="Tempo", y="Acoustic Probability")
+    ```
+    
+6. Are explicit songs more popular than non-explicit songs?
+
+    ```{r}
+    main75 <- subset(main, popularity>=75)
+    main75$explicit <- as.character(main75$explicit)
+    ggplot(main75, aes(x=popularity, fill=explicit)) + 
+      geom_histogram(binwidth = 1) +
+      labs(title="Popularity of Explicit and Non-Explicit Songs", x="Popularity (between 75 and 100)", y="Count") +
+      theme(plot.title = element_text(size=14, hjust=0.5)) +
+      theme(legend.title = element_blank()) +
+      scale_fill_discrete(labels = c("Non-Explicit", "Explicit"))
+    ```
+    

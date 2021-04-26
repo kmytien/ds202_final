@@ -39,7 +39,7 @@ q1
 Based on this graph it looks like a songs "success" or popularity doesnt matter when it was released as there is no patteren to why songs are popular in some years compared to other years.
 
 
-**2.** Does popularity depend on if the song is explicit?
+**2.** Does the popularity of a song depend on the danceability and energy?
 ```{r}
 q2 <- main %>% 
       group_by(popularity) %>%
@@ -157,3 +157,30 @@ ggplot(dat, aes(x = year, weight = popularity)) + geom_bar() + ylab('Popularity'
 ```
 
 Post Malone has dropped 3 albums, the first in 2016, second in 2018, and the third in 2019, therefore those are the years he has a popularity value. It is clear that he is becoming more and more popular with each album that he releases. 
+
+
+**9.** What Genre is the most popular
+```{r}
+library(scales)
+q9 <- by_genre %>%
+   group_by(genres = genres) %>%
+   summarise(popularity = mean(popularity)) %>%
+   top_n(10, wt = popularity)%>%
+   arrange(desc(popularity))
+
+q9
+ggplot(q9, aes(x=reorder(genres,popularity), y = popularity)) + geom_point(col="blue", size =3) +
+   geom_segment(aes(x=genres,
+                    xend = genres,
+                    y = min(popularity),
+                    yend = max(popularity)),
+               linetype="dashed",
+               size=.25) + 
+   labs(title = "Most Popular Genres", x='Genres') + 
+   coord_flip()
+```
+
+I found these genres quite surprising as the most popular. After further thought, it would make sense to see a Chinese favored genre as the most popular given they are the largest country in the world by population.
+
+
+
