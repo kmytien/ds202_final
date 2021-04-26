@@ -9,19 +9,19 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## **Description of Data**
+### **Description of Data**
 
 
-## **Questions Raised**
+### **Questions Raised**
 
 
-## **Pipeline for Obtaining/Cleaning Dataset**
+### **Pipeline for Obtaining/Cleaning Dataset**
 
 
-## **Data Wrangling and Visualization**
+### **Data Wrangling and Visualization**
 
 
-## **Answers for Questions Raised**
+### **Answers for Questions Raised**
 
 **1.** Does the popularity depend on he year it was released?
 
@@ -50,11 +50,11 @@ knitr::opts_chunk$set(echo = TRUE)
 **9.** What are/were the most popular genres in the past century?
 
 
-## **Conclusion**
+### **Conclusion**
 
 
 
-## **Contribution Statement**
+### **Contribution Statement**
 
 Overall, everyone contributed to helping making the questions for analysis. We helped each other when someone was stuck on how to do a question and/or analysis.
 
