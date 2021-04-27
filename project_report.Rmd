@@ -10,9 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### **Description of Data**
+https://www.kaggle.com/yamaerenay/spotify-dataset-19212020-160k-tracks/version/10
 
+Our data was collected from Spotify by self-taught, German data scientist, Yamac Eren Ay. Ay collected this data by using the audio features and search query Spotify has to offer. The dataset includes over 175,000 songs and most of these songs include songs made back to 1922 up until 2021. With that, he created 19 variables, most of them being numerical, to help describe each and every song. 
 
-### **Questions Raised**
+These variables may include: danceability, valence, liveness, loudness, acousticness, energy... and so on.
+
+Out of those variables, we used "popularity" the most, to help us define the success of a song in the music industry (through the eyes of Spotify). We were given 5 different .csv files that were sorted based on year, genre and more.     
 
 
 ### **Pipeline for Obtaining/Cleaning Dataset**
@@ -23,33 +27,70 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### **Answers for Questions Raised**
 
-**1.** Does the popularity depend on he year it was released?
+**1. Does the popularity depend on the year it was released?**
 
+  
+  
+**2. Does the popularity of a song depend on the danceability or energy?**
 
-**2.** Does the popularity of a song depend on the danceability or energy?
+  
+  
+**3. What were the 5 most popular songs in 2020? How do these songs compare to the top 5 in 2010?**
 
+The top 5 songs in 2020 were:
 
-**3.** What were the 5 most popular songs in 2020? How do these songs compare to the top 5 in 2010?
+- Mood by 24kGoldn (feat. iann dior)
+- positions by Ariana Grande
+- DAKITI by Bad Bunny and Jhay Cortez
+- BICHOTA by KAROL G
+- 34+35 by Ariana Grande
 
+The top 5 songs in 2010 were:
 
-**4.** Analyze how song trends such a danceability, energy, loudness, etc... changed throughout each year.
+- Happy Xmas (War Is Over) by John Lennon and Yoko O.
+- Hey, Soul Sister by Train
+- TiK ToK by Kesha 
+- Love The Way You Lie by Eminem and Rihanna
+- Sure Thing by Miguel
 
+Immediately after the I saw the results, I noticed that the popularity rate in 2020 was much higher than that of 2010. This could mean that the competition is getting much harder in the music industry. The reason why I think it's higher in 2020 was because everyone was in quarantine. Since we stayed home more, a lot of us used music as an escape out during the pandemic.
 
-**5.** What is the relationship between the acosticness and the tempo of a song?
+Another thing I noticed is that 2020 includes a more diverse range of music with Latin songs by artists Bad Bunny and Karol G. This is also another hint that the music industry is only getting more competitive.    
 
+  
+**4. Analyze how song trends such a danceability, energy, loudness, etc... changed throughout each year.**
 
-**6.** Are explicit songs more popular than non-explicit songs?
+![*Screenshot of Question 4 Graph*](ss/q4.jpg)
 
+Here, I included 5 different song trends that had the smae range for scale. These variables include acousticness, danceability, energy, liveness and valence. With that, I grouped everything by year and plotted these trends.
 
-**7.** Who are the most popular one hit wonders?
+The first thing you notice here is the acousticness trend. It started off really strong in the 1920's, being the most popular trend. Then, there were some large spikes as years went on, and finally made a huge downfall around 1950. After that, it steadily fell, leading it to be one of the lowest trends today.
 
+On the other hand, energy went on a completely opposite turn. It started off being one of the lowest trends in 920 and steadily rose up to being one of the highest trends today. 
 
-**8.** How has Post Malone's (Tanner's favorite artist) popularity changed over the past few years?
+The rest of the trends stayed pretty close to what their value was in 1920. Liveness stayed near 0 for most of this past century while the others, danceability and valence, stayed around 0.50.   
 
+  
+**5. What is the relationship between the acousticness and the tempo of a song?**
 
-**9.** What are/were the most popular genres in the past century?
+  
+  
+**6. Are explicit songs more popular than non-explicit songs?**
 
+  
+  
+**7. Who are the most popular one hit wonders?**
 
+  
+  
+**8. How has Post Malone's (Tanner's favorite artist) popularity changed over the past few years?**
+
+  
+  
+**9. What are/were the most popular genres in the past century?**
+
+  
+  
 ### **Conclusion**
 
 
@@ -61,7 +102,7 @@ Overall, everyone contributed to helping making the questions for analysis. We h
 
 **MyTien Kien**
 
-MyTien is the team coordinator for Group 4. She made sure everyone had and did their part in the overall analysis/final project. She made sure that the slides were nicely done and easy to read. MyTien was in charge questions 3 and 4.
+MyTien is the team coordinator for Group 4. She made sure everyone had and did their part in the overall analysis/final project. She made sure that the slides, project proposal, and project report were nicely done and easy to read. MyTien was in of questions 3 and 4.
 
 
 **Saketh Jonnadula**
