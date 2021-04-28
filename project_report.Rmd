@@ -29,11 +29,13 @@ Out of those variables, we used "popularity" the most, to help us define the suc
 - Are explicit songs more popular than non-explicit songs?
 - Who are the most popular one hit wonders?
 - How has Post Malone's (Tanner's favorite artist) popularity changed over the past few years?
-- What are/were the most popular genres in the past century?
+- What are/were the most popular genres in the past century?     
 
-
+   
 ### **Pipeline for Obtaining/Cleaning Dataset**
 As mentioned above, we received this dataset from kaggle, an online community full of data scientists and machine learning practitioners. The dataset is an old version (it was the most recent one when we found it), so it only includes songs up to early 2021 (January), with over 175,000 songs.
+
+For cleaning, we haven't had to do much besides dropping the NA values for every .csv file we were given. The csv files we were given were ordered by a specific variable, such as, song ID, year, genre and artist. Since we each did our own analysis, we all cleaned it specific to what we needed for our question.
 
 
 ### **Data Wrangling and Visualization**
@@ -67,6 +69,8 @@ q1 <- by_year %>%
 q1
 ```
   
+Short summary of what you found
+
   
 **2. Does the popularity of a song depend on the danceability or energy?**
 ```{r message=FALSE, warning=FALSE}
@@ -77,6 +81,8 @@ q2 <- main %>%
         head(n = 20)
 q2
 ```
+  
+Short summary of what you found
   
   
 **3. What were the 5 most popular songs in 2020? How do these songs compare to the top 5 in 2010?**
@@ -138,10 +144,13 @@ The rest of the trends stayed pretty close to what their value was in 1920. Live
   
 **5. What is the relationship between the acousticness and the tempo of a song?**
 ```{r message=FALSE, warning=FALSE}
-ggplot(main, aes(x=tempo, y=acousticness)) + 
-        geom_point(size=0.1) +
-        labs(title="Song Acousticness vs. Tempo", x="Tempo", y="Acoustic Probability")
+#Need to fix, prof. recommended doing a histogram instead?
+#ggplot(main, aes(x=tempo, y=acousticness)) + 
+#        geom_point(size=0.1) +
+#        labs(title="Song Acousticness vs. Tempo", x="Tempo", y="Acoustic Probability")
 ```
+
+Short summary of what you found
   
   
 **6. Are explicit songs more popular than non-explicit songs?**
@@ -156,6 +165,8 @@ ggplot(main75, aes(x=popularity, fill=explicit)) +
         theme(legend.title = element_blank()) +
         scale_fill_discrete(labels = c("Non-Explicit", "Explicit"))
 ```
+  
+Short summary of what you found  
   
   
 **7. Who are the most popular one hit wonders?**
@@ -173,6 +184,8 @@ ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularit
 one_hit_names <- inner_join(main, one_hit_wonder, by = 'artists')
 summarise(one_hit_names, name, artists)
 ```
+
+Short summary of what you found
   
   
 **8. How has Post Malone's (Tanner's favorite artist) popularity changed over the past few years?**
@@ -184,6 +197,8 @@ dat <- main %>%
 
 ggplot(dat, aes(x = year, weight = popularity)) + geom_bar() + ylab('Popularity') + coord_cartesian(ylim=c(60, 80))
 ```
+ 
+Short summary of what you found 
   
   
 **9. What are/were the most popular genres in the past century?**
@@ -203,6 +218,8 @@ ggplot(q9, aes(x=reorder(genres,popularity), y = popularity)) + geom_point(col="
        labs(title = "Most Popular Genres", x='Genres') + 
        coord_flip()
 ```
+  
+Short summary of what you found  
   
   
 ### **Conclusion**
