@@ -19,39 +19,86 @@ These variables may include: danceability, valence, liveness, loudness, acoustic
 Out of those variables, we used "popularity" the most, to help us define the success of a song in the music industry (through the eyes of Spotify). We were given 5 different .csv files that were sorted based on year, genre and more.     
 
 
+### **Questions Raised**
+
+- Does the popularity depend on the year it was released?
+- Does the popularity of a song depend on the danceability or energy?
+- What were the 5 most popular songs in 2020? How do these songs compare to the top 5 in 2010?
+- Analyze how song trends such a danceability, energy, loudness, etc... changed throughout each year.
+- What is the relationship between the acousticness and the tempo of a song?
+- Are explicit songs more popular than non-explicit songs?
+- Who are the most popular one hit wonders?
+- How has Post Malone's (Tanner's favorite artist) popularity changed over the past few years?
+- What are/were the most popular genres in the past century?
+
+
 ### **Pipeline for Obtaining/Cleaning Dataset**
+As mentioned above, we received this dataset from kaggle, an online community full of data scientists and machine learning practitioners. The dataset is an old version (it was the most recent one when we found it), so it only includes songs up to early 2021 (January), with over 175,000 songs.
 
 
 ### **Data Wrangling and Visualization**
 
 
+
 ### **Answers for Questions Raised**
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+main <- readr::read_csv('./excel_files/data.csv')
+by_artist <- readr::read_csv('./excel_files/data_by_artist.csv')
+by_genre <- readr::read_csv('./excel_files/data_by_genres.csv')
+by_year <- readr::read_csv('./excel_files/data_by_year.csv')
+main <- drop_na(main)
+
+by_year <- drop_na(by_year)
+by_genre <- drop_na(by_genre)
+```
+
 
 **1. Does the popularity depend on the year it was released?**
-
+```{r message=FALSE, warning=FALSE}
+q1 <- by_year %>% 
+        group_by(year) %>%
+        summarize(popularity = mean(popularity)) %>% 
+        arrange(desc(popularity)) %>%
+        head(n = 20)
+q1
+```
   
   
 **2. Does the popularity of a song depend on the danceability or energy?**
-
+```{r message=FALSE, warning=FALSE}
+q2 <- main %>% 
+        group_by(popularity) %>%
+        select(popularity, artists, name, danceability, energy) %>%        
+        arrange(desc(popularity)) %>%
+        head(n = 20)
+q2
+```
   
   
 **3. What were the 5 most popular songs in 2020? How do these songs compare to the top 5 in 2010?**
+```{r message=FALSE, warning=FALSE}
+#Top 5 for 2020
+q3_2020 <- main %>%
+        filter(year == 2020) %>%
+        select(year, artists, name, popularity) %>%
+        arrange(desc(popularity)) %>%
+        head(n = 5)
 
-The top 5 songs in 2020 were:
+q3_2020
 
-- Mood by 24kGoldn (feat. iann dior)
-- positions by Ariana Grande
-- DAKITI by Bad Bunny and Jhay Cortez
-- BICHOTA by KAROL G
-- 34+35 by Ariana Grande
+#Top 5 for 2010
+q3_2010 <- main %>%
+        filter(year == 2010) %>%
+        select(year, artists, name, popularity) %>%
+        arrange(desc(popularity)) %>%
+        head(n = 5)
 
-The top 5 songs in 2010 were:
-
-- Happy Xmas (War Is Over) by John Lennon and Yoko O.
-- Hey, Soul Sister by Train
-- TiK ToK by Kesha 
-- Love The Way You Lie by Eminem and Rihanna
-- Sure Thing by Miguel
+q3_2010
+```
 
 Immediately after the I saw the results, I noticed that the popularity rate in 2020 was much higher than that of 2010. This could mean that the competition is getting much harder in the music industry. The reason why I think it's higher in 2020 was because everyone was in quarantine. Since we stayed home more, a lot of us used music as an escape out during the pandemic.
 
@@ -59,8 +106,26 @@ Another thing I noticed is that 2020 includes a more diverse range of music with
 
   
 **4. Analyze how song trends such a danceability, energy, loudness, etc... changed throughout each year.**
+```{r message=FALSE, warning=FALSE}
+q4 <- main %>% 
+        group_by(year) %>%
+        summarise(danceability = mean(danceability),
+                  acousticness = mean(acousticness),
+                  energy = mean(energy),
+                  valence = mean(valence),
+                  liveness = mean(liveness))
+q4
 
-![*Screenshot of Question 4 Graph*](ss/q4.jpg)
+
+#Plot for song trends
+q4 <- q4 %>% pivot_longer(danceability:liveness, names_to = 'trend', values_to = 'value')
+
+q4_plot <- q4 %>% 
+        ggplot(aes(x = year, y = value, color = trend)) + geom_line() + 
+        ggtitle("Trends Throughout the Years")
+
+q4_plot
+```
 
 Here, I included 5 different song trends that had the smae range for scale. These variables include acousticness, danceability, energy, liveness and valence. With that, I grouped everything by year and plotted these trends.
 
@@ -72,37 +137,89 @@ The rest of the trends stayed pretty close to what their value was in 1920. Live
 
   
 **5. What is the relationship between the acousticness and the tempo of a song?**
-
+```{r message=FALSE, warning=FALSE}
+ggplot(main, aes(x=tempo, y=acousticness)) + 
+        geom_point(size=0.1) +
+        labs(title="Song Acousticness vs. Tempo", x="Tempo", y="Acoustic Probability")
+```
   
   
 **6. Are explicit songs more popular than non-explicit songs?**
-
+```{r message=FALSE, warning=FALSE}
+main75 <- subset(main, popularity>=75)
+main75$explicit <- as.character(main75$explicit)
+    
+ggplot(main75, aes(x=popularity, fill=explicit)) + 
+        geom_histogram(binwidth = 1) +
+        labs(title="Popularity of Explicit and Non-Explicit Songs", x="Popularity (between 75 and 100)", y="Count") +
+        theme(plot.title = element_text(size=14, hjust=0.5)) +
+        theme(legend.title = element_blank()) +
+        scale_fill_discrete(labels = c("Non-Explicit", "Explicit"))
+```
   
   
 **7. Who are the most popular one hit wonders?**
+```{r message=FALSE, warning=FALSE}
+one_hit_wonder <- main %>% 
+        group_by(artists = artists) %>%
+        summarise(Num_track = n(), Popularity = mean(popularity)) %>%
+        filter(Num_track == 1) %>%
+        top_n(5, wt = Popularity)
 
+ggplot(one_hit_wonder, aes(x = reorder(artists, -Popularity), weight = Popularity)) + geom_bar() + coord_cartesian(ylim=c(75,100)) +
+      xlab("Artists") + ylab("Popularity") + ggtitle("Most Popular One Hit Wonders") + coord_flip()
+
+
+one_hit_names <- inner_join(main, one_hit_wonder, by = 'artists')
+summarise(one_hit_names, name, artists)
+```
   
   
 **8. How has Post Malone's (Tanner's favorite artist) popularity changed over the past few years?**
+```{r message=FALSE, warning=FALSE}
+dat <- main %>%
+       group_by(year = year, artists = artists) %>%
+       summarise(popularity = mean(popularity)) %>%
+       filter(artists == "['Post Malone']")
 
+ggplot(dat, aes(x = year, weight = popularity)) + geom_bar() + ylab('Popularity') + coord_cartesian(ylim=c(60, 80))
+```
   
   
 **9. What are/were the most popular genres in the past century?**
+```{r message=FALSE, warning=FALSE}
+library(scales)
 
+q9 <- by_genre %>%
+       group_by(genres = genres) %>%
+       summarise(popularity = mean(popularity)) %>%
+       top_n(10, wt = popularity)%>%
+       arrange(desc(popularity))
+q9
+
+
+ggplot(q9, aes(x=reorder(genres,popularity), y = popularity)) + geom_point(col="blue", size =3) +
+       geom_segment(aes(x=genres, xend = genres, y = min(popularity), yend = max(popularity)), linetype="dashed", size=.25) + 
+       labs(title = "Most Popular Genres", x='Genres') + 
+       coord_flip()
+```
   
   
 ### **Conclusion**
+**Overall, we all have concluded that...**
 
+-
+-
+-
+-
+-
 
 
 ### **Contribution Statement**
 
-Overall, everyone contributed to helping making the questions for analysis. We helped each other when someone was stuck on how to do a question and/or analysis.
-
-
 **MyTien Kien**
 
-MyTien is the team coordinator for Group 4. She made sure everyone had and did their part in the overall analysis/final project. She made sure that the slides, project proposal, and project report were nicely done and easy to read. MyTien was in of questions 3 and 4.
+MyTien is the team coordinator for Group 4. With that, she helped supervise everyone by making sure they contributed to the presentation, proposal, analysis and the report. She was in charge of making sure that everything was done neatly and in a timely manner. She contributed to the overall analysis by looking at the comparison between two years in terms of music patterns, as well as analyzing the trends given throughout the past century (Questions 3 & 4).
 
 
 **Saketh Jonnadula**
