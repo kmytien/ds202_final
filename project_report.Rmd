@@ -136,7 +136,7 @@ q4_plot <- q4 %>%
 q4_plot
 ```
 
-Here, I included 5 different song trends that had the smae range for scale. These variables include acousticness, danceability, energy, liveness and valence. With that, I grouped everything by year and plotted these trends.
+Here, I included 5 different song trends that had the same range for scale. These variables include acousticness, danceability, energy, liveness and valence. With that, I grouped everything by year and plotted these trends.
 
 The first thing you notice here is the acousticness trend. It started off really strong in the 1920's, being the most popular trend. Then, there were some large spikes as years went on, and finally made a huge downfall around 1950. After that, it steadily fell, leading it to be one of the lowest trends today.
 
@@ -147,13 +147,22 @@ The rest of the trends stayed pretty close to what their value was in 1920. Live
   
 **5. What is the relationship between the acousticness and the tempo of a song?**
 ```{r message=FALSE, warning=FALSE}
-#Need to fix, prof. recommended doing a histogram instead?
-#ggplot(main, aes(x=tempo, y=acousticness)) + 
-#        geom_point(size=0.1) +
-#        labs(title="Song Acousticness vs. Tempo", x="Tempo", y="Acoustic Probability")
+q5 <- main[ , c("acousticness", "tempo")]
+    q5 <- q5 %>% 
+    mutate(cuts = cut(tempo, breaks = c(0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250)))
+    q5 <- q5 [!(q5$tempo==0.000),]
+    q5$cuts <- as.character(q5$cuts)
+    q5$cuts <- factor(q5$cuts, levels=c("(25,50]", "(50,75]", "(75,100]", "(100,125]", "(125,150]", "(150,175]", "(175,200]", "(200,225]", "(225,250]"))
+    ggplot(q5, aes(x=cuts, y=acousticness)) +
+      geom_boxplot() +
+      theme(axis.text.x = element_text(angle=45, hjust=1)) +
+      labs(title="Acousticness vs. Tempo", x="Tempo", y="Acousticness") +
+      theme(plot.title = element_text(size=14, hjust=0.5))
 ```
 
-Short summary of what you found
+I first created a simple scatterplot for this question, however it was not very informative. I instead created grouped boxplots to show the different acousticnesses at different tempos. The tempo values are group by 25. I had to do a bit of wrangling to make this work the way I wanted. I created a subset of only the acousticness and tempo values, then mutated a new column which put the tempo values into ranged groups. I removed any songs with a tempo of 0, factored the data to order it properly in the visualization, and then created the boxplot.
+
+With this visualization, it does appear that there are some slight trends in this relationship. Songs with a tempo between 25 and 75 are clearly much higher in acousticness than songs between 75 and 200. Interestingly, songs with a very high tempo (between 200 and 250) begin to rise again in acousticness.
   
   
 **6. Are explicit songs more popular than non-explicit songs?**
@@ -169,7 +178,11 @@ ggplot(main75, aes(x=popularity, fill=explicit)) +
         scale_fill_discrete(labels = c("Non-Explicit", "Explicit"))
 ```
   
-Short summary of what you found  
+For this question I overlaid the two groups onto a single histogram. This histogram only includes songs with at least a popularity rating of 75 in order to focus on the higher rated content. The explicit ratings also needed to be character arguments in order to function properly in the histogram.
+
+Surprisingly, the non-explicit songs are generally much more popular than the explicit songs. The difference in the popularity decreases as the rating gets higher, becoming quite similar around a popularity rating of 90. The only song with a popularity rating of 100 in this dataset is explicit. 
+
+The reason I expected explicit songs to be overall more popular is likely because of the distribution of this histogram, in that the higher the popularity rating, the larger the proportion of explicit songs being popular.
   
   
 **7. Who are the most popular one hit wonders?**
@@ -244,9 +257,9 @@ to read.
 ### **Conclusion**
 **Overall, we all have concluded that...**
 
--
--
--
+- Music trends and the taste of music listeners changes a lot over time!
+- There are many different topics with interesting datasets to explore
+- 
 -
 -
 
@@ -270,5 +283,5 @@ Tanner was in charge of questions 7, 8, and 9 as well as finding the best data s
 
 **Ryan Pate**
 
-Ryan was in charge of questions 5 and 6.
+Ryan was in charge of questions 5 and 6, which contributed to the analysis by looking at the relationships between different variables of music, as well as exploring the popularity of explicit versus non-explicit music.
 
