@@ -148,13 +148,16 @@ The rest of the trends stayed pretty close to what their value was in 1920. Live
 **5. What is the relationship between the acousticness and the tempo of a song?**
 ```{r message=FALSE, warning=FALSE}
 q5 <- main[ , c("acousticness", "tempo")]
-    q5 <- q5 %>% 
-    mutate(cuts = cut(tempo, breaks = c(0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250)))
-    q5 <- q5 [!(q5$tempo==0.000),]
-    q5$cuts <- as.character(q5$cuts)
-    q5$cuts <- factor(q5$cuts, levels=c("(25,50]", "(50,75]", "(75,100]", "(100,125]", "(125,150]", "(150,175]", "(175,200]", "(200,225]", "(225,250]"))
-    ggplot(q5, aes(x=cuts, y=acousticness)) +
-      geom_boxplot() +
+
+q5 <- q5 %>% mutate(cuts = cut(tempo, breaks = c(0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 250)))
+
+q5 <- q5 [!(q5$tempo==0.000),]
+    
+q5$cuts <- as.character(q5$cuts)
+    
+q5$cuts <- factor(q5$cuts, levels=c("(25,50]", "(50,75]", "(75,100]", "(100,125]", "(125,150]", "(150,175]", "(175,200]", "(200,225]", "(225,250]"))
+    
+ggplot(q5, aes(x = cuts, y = acousticness)) + geom_boxplot() +
       theme(axis.text.x = element_text(angle=45, hjust=1)) +
       labs(title="Acousticness vs. Tempo", x="Tempo", y="Acousticness") +
       theme(plot.title = element_text(size=14, hjust=0.5))
