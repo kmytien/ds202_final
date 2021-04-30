@@ -72,11 +72,16 @@ q1 <- by_year %>%
 q1
 ```
   
-Short summary of what you found
+Based on this graph it looks like a songs "success" or popularity doesnt matter when it was released as there is no pattern to why songs are popular in some years compared to other years. It is surprising to see that no 2010 years are even in the top 20 when I was doing this question that is what I was really expecting to pop up.
 
   
 **2. Does the popularity of a song depend on the danceability or energy?**
 ```{r message=FALSE, warning=FALSE}
+main_danceability_ave <- mean(main$danceability)
+main_danceability_ave
+
+main_energy_ave <- mean(main$energy)
+main_energy_ave
 q2 <- main %>% 
         group_by(popularity) %>%
         select(popularity, artists, name, danceability, energy) %>%        
@@ -85,7 +90,7 @@ q2 <- main %>%
 q2
 ```
   
-Short summary of what you found
+You can see that for a song to be decently popular that the song needs to have a balance between dancebility and energy. The song cant have the biggest dancebility without the same level of energy the only outlier from this is that Bille Eilish's songs are all catchy but have little to no energy so it makes sense why her numbers are the way that they are. Also the average for every song is 0.54 for dancebility and the average for energy is 0.48 but if you only look at the the top 10 you get 0.76 for dancebility and 0.63 for the average energy. So if you want a song to do good it needs to have a dancebility and energy rating better than the average.
   
   
 **3. What were the 5 most popular songs in 2020? How do these songs compare to the top 5 in 2010?**
@@ -262,10 +267,9 @@ to read.
 
 - Music trends and the taste of music listeners changes a lot over time!
 - There are many different topics with interesting datasets to explore
-- 
--
--
-
+- Many things go into how a song is successful 
+- Things that we were for sure about when making the questions turned out to be the opposite when 
+  doing the analysis
 
 ### **Contribution Statement**
 
@@ -276,7 +280,8 @@ MyTien is the team coordinator for Group 4. With that, she helped supervise ever
 
 **Saketh Jonnadula**
 
-Saketh was in charge of questions 1 and 2.
+Saketh was in charge of questions 1 and 2, which contributed to the analysis for looking into what years 
+were the most popular and looking at how danceability and energy affects a song.
 
 
 **Tanner Dunn**

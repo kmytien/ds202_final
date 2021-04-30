@@ -42,6 +42,11 @@ Based on this graph it looks like a songs "success" or popularity doesnt matter 
 
 **2.** Does the popularity of a song depend on the danceability and energy?
 ```{r}
+main_danceability_ave <- mean(main$danceability)
+main_danceability_ave
+
+main_energy_ave <- mean(main$energy)
+main_energy_ave
 q2 <- main %>% 
       group_by(popularity) %>%
       select(popularity, artists, name, danceability, energy) %>% arrange(desc(popularity)) %>%
